@@ -12,6 +12,10 @@ var app = express();
 
 var supported = ['en', 'es', 'ca'];
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
 app.use(locale(supported));
 app.use(logger('dev'));
 app.use(bodyParser.json());
