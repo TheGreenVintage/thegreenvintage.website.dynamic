@@ -3,18 +3,37 @@ var router = express.Router();
 var domain = 'thegreenvintage.com';
 var mailgun = require('mailgun-js')({apiKey: process.env.MAILGUN_API_KEY, domain: domain});
 
-router.get('/email', function(req, res) {
-  var data = {
-    from: 'Excited User <me@samples.mailgun.org>',
-    to: 'fcsonline@gmail.com',
-    subject: 'Hello',
-    text: 'Testing some Mailgun awesomness!'
-  };
-  
-  mailgun.messages().send(data, function (error, body) {
-    console.log(body);
-    res.send('Email sent');
+router.post('/support', function(req, res) {
+
+  if (!req.body) {
+    res.sendStatus(409);
+    return;
+  }
+
+  req.app.render('contact', req.body, function(err, html) {
+    if (err) {
+      res.sendStatus(409);
+      return;
+    }
+
+    var data = {
+      from: req.body.name + ' <' + req.body.email + '>',
+      to: 'info@thegreenvintage.com',
+      bcc: 'fcsonline@gmail.com',
+      subject: req.body.subject,
+      html: html
+    };
+
+    mailgun.messages().send(data, function (err, body) {
+      if (err) {
+        res.sendStatus(409);
+        return;
+      }
+
+      res.sendStatus(200);
+    });
   });
+  
 });
 
 module.exports = router;
