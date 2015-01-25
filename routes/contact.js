@@ -30,7 +30,7 @@ router.post('/support', function(req, res) {
         return;
       }
 
-      res.sendStatus(200);
+      res.json({});
     });
   });
   
