@@ -60,7 +60,12 @@ function onError(error) {
  */
 
 function onListening() {
-  debug('Listening on port ' + server.address().port);
+  debug('Listening on port ' + port);
+
+  // port is a UNIX socket file
+  if (isNaN(parseInt(port))) {
+    fs.chmod(port, 0777);
+  }
 }
 
 function shutdown() {
