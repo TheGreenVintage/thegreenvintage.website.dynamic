@@ -1,6 +1,6 @@
 {
-  "name": "lol",
-  "version": "0.0.0",
+  "name": "thegreenvintage",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -13,7 +13,6 @@
     "serve-favicon": "~2.2.0",
     "debug": "~2.1.1",
     "jade": "~1.8.2",
-    "locale": "0.0.20",
     "mailgun-js": "0.6.8"
   }
 }

@@ -1,5 +1,4 @@
 var express = require('express');
-var locale = require('locale');
 var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -10,13 +9,10 @@ var ping = require('./routes/ping');
 
 var app = express();
 
-var supported = ['en', 'es', 'ca'];
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(locale(supported));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
