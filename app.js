@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var contact = require('./routes/contact');
+var ping = require('./routes/ping');
 
 var app = express();
 
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../thegreenvintage.website.static/_site')));
 
 app.use('/contact', contact);
+app.use('/ping', ping);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
